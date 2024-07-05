@@ -26,8 +26,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var expose = _ref.expose;
     expose();
     var productData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({});
-    var mainImage = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
-
+    var mainImage = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("");
+    var quantity = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     // Method to fetch the product detail from API
     var fetchProduct = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -37,7 +37,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/client/products/fall-limited-edition-sneakers');
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/client/products/fall-limited-edition-sneakers");
             case 3:
               response = _context.sent;
               productData.value = response.data.data;
@@ -50,9 +50,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 10;
               _context.t0 = _context["catch"](0);
               if (_context.t0.response && _context.t0.response.status === 404) {
-                console.error('Not found');
+                console.error("Not found");
               } else {
-                console.error('Error fetching product:', _context.t0);
+                console.error("Error fetching product:", _context.t0);
               }
             case 13:
             case "end":
@@ -64,13 +64,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _ref2.apply(this, arguments);
       };
     }();
+    var updateImageLink = function updateImageLink(index) {
+      mainImage.value = productData.value.images[index];
+    };
+    var incrementQuantity = function incrementQuantity() {
+      quantity.value += 1;
+    };
+    var decrementQuantity = function decrementQuantity() {
+      if (quantity.value > 1) {
+        quantity.value -= 1;
+      }
+    };
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       fetchProduct();
     });
     var __returned__ = {
       productData: productData,
       mainImage: mainImage,
+      quantity: quantity,
       fetchProduct: fetchProduct,
+      updateImageLink: updateImageLink,
+      incrementQuantity: incrementQuantity,
+      decrementQuantity: decrementQuantity,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       axios: (axios__WEBPACK_IMPORTED_MODULE_1___default())
@@ -104,29 +119,66 @@ var _hoisted_1 = {
   "class": "product-page"
 };
 var _hoisted_2 = {
+  "class": "product-section"
+};
+var _hoisted_3 = {
   "class": "image-gallery"
 };
-var _hoisted_3 = ["src"];
-var _hoisted_4 = {
+var _hoisted_4 = ["src"];
+var _hoisted_5 = {
   "class": "sub-images"
 };
-var _hoisted_5 = ["src"];
-var _hoisted_6 = {
+var _hoisted_6 = ["src", "onClick"];
+var _hoisted_7 = {
   "class": "product-details"
 };
+var _hoisted_8 = {
+  "class": "product-discounted"
+};
+var _hoisted_9 = {
+  "class": "discount-badge"
+};
+var _hoisted_10 = {
+  "class": "full-price"
+};
+var _hoisted_11 = {
+  "class": "d-flex"
+};
+var _hoisted_12 = {
+  "class": "quantity-selector"
+};
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "add-to-cart d-flex"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "cart"
+  }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Add to cart")], -1 /* HOISTED */);
+});
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  var _$setup$productData$p, _$setup$productData$d, _$setup$productData$p2;
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: $setup.mainImage,
     alt: "Main Product Image",
     "class": "main-image"
-  }, null, 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.productData.images, function (image, index) {
+  }, null, 8 /* PROPS */, _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.productData.images, function (image, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
       key: index,
       src: image,
       alt: "Sub Image",
-      "class": "sub-image"
-    }, null, 8 /* PROPS */, _hoisted_5);
-  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.productData.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.productData.description), 1 /* TEXT */)])]);
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+        'sub-image': true,
+        selected: image === $setup.mainImage
+      }),
+      onClick: function onClick($event) {
+        return $setup.updateImageLink(index);
+      }
+    }, null, 10 /* CLASS, PROPS */, _hoisted_6);
+  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.productData.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.productData.description), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, "$ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$productData$p = $setup.productData.price) === null || _$setup$productData$p === void 0 ? void 0 : _$setup$productData$p.discounted) + ".00", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$productData$d = $setup.productData.discount) === null || _$setup$productData$d === void 0 ? void 0 : _$setup$productData$d.amount) + "%", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, "$" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$productData$p2 = $setup.productData.price) === null || _$setup$productData$p2 === void 0 ? void 0 : _$setup$productData$p2.full) + ".00", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: $setup.decrementQuantity
+  }, "-"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.quantity), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: $setup.incrementQuantity
+  }, "+")]), _hoisted_13])])])]);
 }
 
 /***/ }),
@@ -147,7 +199,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.product-page[data-v-7b8d5cc0] {\r\n    display: flex;\r\n    padding: 20px;\n}\n.image-gallery[data-v-7b8d5cc0] {\r\n  flex: 1;\n}\n.main-image[data-v-7b8d5cc0] {\r\n  width: 100%;\r\n  max-width: 500px;\r\n  height: auto;\r\n  margin-bottom: 20px;\r\n  border-radius: 10px;\n}\n.sub-images[data-v-7b8d5cc0] {\r\n  display: flex;\r\n  gap: 10px;\n}\n.sub-image[data-v-7b8d5cc0] {\r\n  width: 100px;\r\n  height: 100px;\r\n  cursor: pointer;\r\n  border: 2px solid transparent;\r\n  border-radius: 10px;\n}\n.product-details[data-v-7b8d5cc0] {\r\n  flex: 1;\r\n  padding: 20px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.product-page[data-v-7b8d5cc0] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  min-height: 100vh;\n}\n.product-section[data-v-7b8d5cc0] {\r\n  display: flex;\r\n  width: 100%;\r\n  margin: 25px;\n}\n.product-section > div[data-v-7b8d5cc0] {\r\n  width: 50%;\n}\n.image-gallery[data-v-7b8d5cc0] {\r\n  justify-content: center;\r\n  align-items: center;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 30px;\n}\n.main-image[data-v-7b8d5cc0] {\r\n  width: 24rem;\r\n  height: 24rem;\r\n  border-radius: 10px;\n}\n.sub-images[data-v-7b8d5cc0] {\r\n  display: flex;\r\n  gap: 20px;\n}\n.sub-image[data-v-7b8d5cc0] {\r\n  width: 5rem;\r\n  height: 5rem;\r\n  border-radius: 10px;\n}\n.sub-image.selected[data-v-7b8d5cc0] {\r\n  box-shadow: 0px 0px 0px 2px rgb(172 76 2);\r\n  opacity: 0.3;\n}\n.product-details h1[data-v-7b8d5cc0] {\r\n  font-size: 36px;\n}\n.product-details p[data-v-7b8d5cc0] {\r\n  font-size: 16px;\r\n  color: hsl(220, 14%, 75%);\n}\n.product-details .product-discounted[data-v-7b8d5cc0] {\r\n  font-weight: bold;\r\n  font-size: 22px;\r\n  margin-right: 10px;\n}\n.product-details .discount-badge[data-v-7b8d5cc0] {\r\n  background: hsl(25, 100%, 94%);\r\n  color: hsl(26, 100%, 55%);\r\n  font-size: 14px;\r\n  font-weight: 600;\r\n  padding: 1px 7px;\r\n  border-radius: 5px;\n}\n.product-details .full-price[data-v-7b8d5cc0] {\r\n  text-decoration: line-through;\r\n  font-size: 14px;\r\n  color: #ccc;\r\n  margin-block: 15px;\r\n  font-weight: 600;\n}\n.d-flex[data-v-7b8d5cc0] {\r\n  display: flex;\n}\n.quantity-selector[data-v-7b8d5cc0] {\r\n  display: flex;\r\n  background: #f7f8fd;\r\n  gap: 17px;\r\n  padding: 10px;\r\n  align-items: center;\r\n  font-weight: 500;\r\n  border-radius: 10px;\n}\n.quantity-selector div[data-v-7b8d5cc0] {\r\n  width: 20px;\r\n  font-weight: bold;\n}\n.quantity-selector button[data-v-7b8d5cc0] {\r\n  border: 0;\r\n  background: transparent;\r\n  color: hsl(26, 100%, 55%);\r\n  padding-inline: 10px;\r\n  font-size: 22px;\r\n  font-weight: bold;\n}\n.add-to-cart[data-v-7b8d5cc0] {\r\n  background-color: hsl(26, 100%, 55%);\r\n  color: #fff;\r\n  border-radius: 10px;\r\n  padding: 10px 50px;\r\n  margin-left: 15px;\r\n  font-size: 16px;\r\n  border: none;\r\n  gap: 12px;\r\n  align-items: center;\n}\n.cart[data-v-7b8d5cc0] {\r\n  background-image: url(/images/cart.png);\r\n  width: 20px;\r\n  display: block;\r\n  height: 20px;\r\n  background-size: contain;\r\n  background-repeat: no-repeat;\n}\n@media (min-width: 375px) and (max-width: 760px) {\n.product-page .product-section[data-v-7b8d5cc0] {\r\n    flex-direction: column;\r\n    margin: 10px;\n}\n.product-page .product-section > div[data-v-7b8d5cc0] {\r\n    width: 100%;\n}\n.product-page .product-section .image-gallery[data-v-7b8d5cc0] {\r\n    gap: 10px;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
