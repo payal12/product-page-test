@@ -45,8 +45,12 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from 'vue-router';
 import axios from "axios";
 
+
+const route = useRoute();
+const router = useRouter();
 const productData = ref({});
 const mainImage = ref("");
 const quantity = ref(0);
@@ -62,7 +66,7 @@ const fetchProduct = async () => {
     console.log("mainImage", mainImage.value);
   } catch (error) {
     if (error.response && error.response.status === 404) {
-      console.error("Not found");
+      router.push({ name: 'NotFound' });
     } else {
       console.error("Error fetching product:", error);
     }

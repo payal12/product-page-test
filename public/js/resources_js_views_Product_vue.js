@@ -12,6 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -20,11 +21,14 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Product',
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
+    var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRouter)();
     var productData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({});
     var mainImage = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("");
     var quantity = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
@@ -50,7 +54,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 10;
               _context.t0 = _context["catch"](0);
               if (_context.t0.response && _context.t0.response.status === 404) {
-                console.error("Not found");
+                router.push({
+                  name: 'NotFound'
+                });
               } else {
                 console.error("Error fetching product:", _context.t0);
               }
@@ -79,6 +85,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       fetchProduct();
     });
     var __returned__ = {
+      route: route,
+      router: router,
       productData: productData,
       mainImage: mainImage,
       quantity: quantity,
@@ -88,6 +96,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       decrementQuantity: decrementQuantity,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      useRoute: vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute,
+      useRouter: vue_router__WEBPACK_IMPORTED_MODULE_2__.useRouter,
       axios: (axios__WEBPACK_IMPORTED_MODULE_1___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
