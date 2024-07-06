@@ -10,9 +10,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-const imageUrl = ref(require('/images/icon-404.svg'));
+const imageUrl = ref(require("/images/icon-404.svg"));
 </script>
 
 <style scoped>
@@ -25,7 +25,7 @@ const imageUrl = ref(require('/images/icon-404.svg'));
   text-align: center;
   background: linear-gradient(135deg, #f06, #ffba00);
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .not-found h1 {
@@ -65,7 +65,8 @@ const imageUrl = ref(require('/images/icon-404.svg'));
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {

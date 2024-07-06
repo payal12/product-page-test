@@ -1,6 +1,7 @@
 <template>
   <div class="product-page">
-    <div class="product-section">
+    <div v-if="isLoading"><Loader /></div>
+    <div v-else class="product-section">
       <div class="image-gallery">
         <img :src="mainImage" alt="Main Product Image" class="main-image" />
         <div class="sub-images">
@@ -45,12 +46,13 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
-
+import Loader from "../components/Loader.vue";
 
 const route = useRoute();
 const router = useRouter();
+const isLoading = ref(true);
 const productData = ref({});
 const mainImage = ref("");
 const quantity = ref(0);
@@ -61,15 +63,15 @@ const fetchProduct = async () => {
       "/client/products/fall-limited-edition-sneakers"
     );
     productData.value = response.data.data;
-    console.log("product data", productData.value);
     mainImage.value = productData.value.images[0];
-    console.log("mainImage", mainImage.value);
   } catch (error) {
     if (error.response && error.response.status === 404) {
-      router.push({ name: 'NotFound' });
+      router.push({ name: "NotFound" });
     } else {
       console.error("Error fetching product:", error);
     }
+  } finally {
+    isLoading.value = false;
   }
 };
 const updateImageLink = (index) => {
