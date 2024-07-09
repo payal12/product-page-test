@@ -31,13 +31,11 @@
         <div class="full-price">${{ productData.price?.full }}.00</div>
         <div class="d-flex">
           <div class="quantity-selector">
-            <button @click="decrementQuantity">-</button>
+            <Button @click="decrementQuantity">-</Button>
             <div>{{ quantity }}</div>
-            <button @click="incrementQuantity">+</button>
+            <Button @click="incrementQuantity">+</Button>
           </div>
-          <button class="add-to-cart d-flex">
-            <span class="cart"></span><span>Add to cart</span>
-          </button>
+          <Button buttonClass="add-to-cart d-flex"><span class="cart"></span><span>Add to cart</span></Button>
         </div>
       </div>
     </div>
@@ -45,17 +43,22 @@
 </template>
 
 <script setup>
+// Imports
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
 import Loader from "../components/Loader.vue";
+import Button from "../components/Button.vue";
 
+// Variable Declaration
 const route = useRoute();
 const router = useRouter();
 const isLoading = ref(true);
 const productData = ref({});
 const mainImage = ref("");
 const quantity = ref(0);
+
+// Method Declaration
 // Method to fetch the product detail from API
 const fetchProduct = async () => {
   try {
@@ -74,14 +77,17 @@ const fetchProduct = async () => {
     isLoading.value = false;
   }
 };
+// Method to update the image link
 const updateImageLink = (index) => {
   mainImage.value = productData.value.images[index];
 };
 
+// Method to increment the Quantity
 const incrementQuantity = () => {
   quantity.value += 1;
 };
 
+// Method to decrement the Quantity
 const decrementQuantity = () => {
   if (quantity.value > 1) {
     quantity.value -= 1;
@@ -93,147 +99,3 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-.product-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.product-section {
-  display: flex;
-  width: 100%;
-  margin: 25px;
-}
-
-.product-section > div {
-  width: 50%;
-}
-
-.image-gallery {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.main-image {
-  width: 24rem;
-  height: 24rem;
-  border-radius: 10px;
-}
-
-.sub-images {
-  display: flex;
-  gap: 20px;
-}
-
-.sub-image {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 10px;
-}
-
-.sub-image.selected {
-  box-shadow: 0px 0px 0px 2px rgb(172 76 2);
-  opacity: 0.3;
-}
-
-.product-details h1 {
-  font-size: 36px;
-}
-
-.product-details p {
-  font-size: 16px;
-  color: hsl(220, 14%, 75%);
-}
-
-.product-details .product-discounted {
-  font-weight: bold;
-  font-size: 22px;
-  margin-right: 10px;
-}
-
-.product-details .discount-badge {
-  background: hsl(25, 100%, 94%);
-  color: hsl(26, 100%, 55%);
-  font-size: 14px;
-  font-weight: 600;
-  padding: 1px 7px;
-  border-radius: 5px;
-}
-
-.product-details .full-price {
-  text-decoration: line-through;
-  font-size: 14px;
-  color: #ccc;
-  margin-block: 15px;
-  font-weight: 600;
-}
-
-.d-flex {
-  display: flex;
-}
-
-.quantity-selector {
-  display: flex;
-  background: #f7f8fd;
-  gap: 17px;
-  padding: 10px;
-  align-items: center;
-  font-weight: 500;
-  border-radius: 10px;
-}
-
-.quantity-selector div {
-  width: 20px;
-  font-weight: bold;
-}
-
-.quantity-selector button {
-  border: 0;
-  background: transparent;
-  color: hsl(26, 100%, 55%);
-  padding-inline: 10px;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.add-to-cart {
-  background-color: hsl(26, 100%, 55%);
-  color: #fff;
-  border-radius: 10px;
-  padding: 10px 50px;
-  margin-left: 15px;
-  font-size: 16px;
-  border: none;
-  gap: 12px;
-  align-items: center;
-}
-
-.cart {
-  background-image: url(/images/cart.png);
-  width: 20px;
-  display: block;
-  height: 20px;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-@media (min-width: 375px) and (max-width: 760px) {
-  .product-page .product-section {
-    flex-direction: column;
-    margin: 10px;
-  }
-
-  .product-page .product-section > div {
-    width: 100%;
-  }
-
-  .product-page .product-section .image-gallery {
-    gap: 10px;
-  }
-}
-</style>
